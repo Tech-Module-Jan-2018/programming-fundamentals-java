@@ -16,9 +16,9 @@ public class P08SumOfOddNumbers {
 
     public static void mainModulus(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-        int num = Integer.parseInt(sc.nextLine());
+        int num = Integer.parseInt(scan.nextLine());
         int oddSum= 0;
         int count=0;
         for (int i = 1; ; i++) {
