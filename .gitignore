@@ -1,4 +1,8 @@
 /ignored
+/src
+/out
+
+!.java
 
 # Compiled class file
 *.class
