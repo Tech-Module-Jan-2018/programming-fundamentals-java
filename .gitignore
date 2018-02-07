@@ -1,5 +1,7 @@
-*/src/
+*/src
 /ignored
+/out
+
 
 !*/src/*.java
-!*.md
+!*/*.md
