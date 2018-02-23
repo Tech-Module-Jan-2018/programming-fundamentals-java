@@ -19,19 +19,19 @@ public class p07PopulationCounter {
             long population = Long.parseLong(tokens[2]);
 
             if (countries.containsKey(country) == false) {
-                countries.put(country, new LinkedHashMap<>());
+                countries.put(country, new LinkedHashMap<>()); //add the country if absent
             }
 
             if (countries.get(country).containsKey(town) == false) {
-                countries.get(country).put(town, population);
+                countries.get(country).put(town, population); //add the city if absent
             } else {
-                countries.get(country).put(town, countries.get(country).get(town) + population);
+                countries.get(country).put(town, countries.get(country).get(town) + population); //increment the city population in the given country
             }
         }
 
         countries.entrySet()
                 .stream()
-                .sorted((c1, c2) -> Long.compare(c2.getValue()
+                .sorted((c1, c2) -> Long.compare(c2.getValue() //Countries should be ordered by their total population in descending order, so we sum all cities population
                                 .values()
                                 .stream()
                                 .mapToLong(Long::longValue)
@@ -53,7 +53,7 @@ public class p07PopulationCounter {
                     c.getValue()
                             .entrySet()
                             .stream()
-                            .sorted((t1, t2) -> Long.compare(t2.getValue(), t1.getValue()))
+                            .sorted((t1, t2) -> Long.compare(t2.getValue(), t1.getValue())) //the cities should be ordered by the same criterion
                             .forEach(t -> System.out.printf("=>%s: %d%n", t.getKey(), t.getValue()));
                 });
     }
