@@ -19,13 +19,13 @@ public class p07PopulationCounter {
             long population = Long.parseLong(tokens[2]);
 
             if (countries.containsKey(country) == false) {
-                countries.put(country, new LinkedHashMap<>()); //add the country if absent
+                countries.put(country, new LinkedHashMap<>());
             }
 
             if (countries.get(country).containsKey(town) == false) {
-                countries.get(country).put(town, population); //add the city if absent
+                countries.get(country).put(town, population);
             } else {
-                countries.get(country).put(town, countries.get(country).get(town) + population); //increment the city population in the given country
+                countries.get(country).put(town, countries.get(country).get(town) + population);
             }
         }
 
@@ -34,26 +34,26 @@ public class p07PopulationCounter {
                 .sorted((c1, c2) -> Long.compare(c2.getValue()
                                 .values()
                                 .stream()
-                                .collect(Collectors.summarizingLong(Long::valueOf))
-                                .getSum(),
+                                .mapToLong(Long::longValue)
+                                .sum(),
                         c1.getValue()
                                 .values()
                                 .stream()
-                                .collect(Collectors.summarizingLong(Long::valueOf))
-                                .getSum())) //Countries should be ordered by their total population in descending order, so we sum all cities population
+                                .mapToLong(Long::longValue)
+                                .sum()))
                 .forEach(c -> {
                     System.out.printf("%s (total population: %d)%n",
                             c.getKey(),
                             c.getValue()
                                     .values()
                                     .stream()
-                                    .collect(Collectors.summarizingLong(Long::valueOf))
-                                    .getSum());
+                                    .mapToLong(Long::longValue)
+                                    .sum());
 
                     c.getValue()
                             .entrySet()
                             .stream()
-                            .sorted((t1, t2) -> Long.compare(t2.getValue(), t1.getValue())) //the cities should be ordered by the same criterion
+                            .sorted((t1, t2) -> Long.compare(t2.getValue(), t1.getValue()))
                             .forEach(t -> System.out.printf("=>%s: %d%n", t.getKey(), t.getValue()));
                 });
     }
